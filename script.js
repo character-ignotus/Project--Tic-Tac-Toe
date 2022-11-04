@@ -38,13 +38,19 @@ gameboard.bindEvents();
 
 const Player = () => {
     let array = [[], [], []];
+    let rowContainer = [0, 0, 0];
 
     const logInput = (row, column) => {
         array[row][column] = 1;
+        rowContainer[row] += 1;
     };
 
-    return {array, logInput};
+    return {array, rowContainer, logInput};
 };
 
 const player1 = Player();
 const player2 = Player();
+
+
+
+
