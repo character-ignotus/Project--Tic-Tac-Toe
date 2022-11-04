@@ -1,0 +1,25 @@
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    outline: none;
+    font-family: 'Roboto', 'Times New Roman', Times, serif;
+    list-style: none;
+}
+
+.gameboard {
+    width: 500px;
+    height: 500px;
+    display: flex;
+    flex-direction: column;
+}
+
+.gameboard > div {
+    flex-grow: 1;
+    display: flex;
+}
+
+.gameboard > div > div {
+    border: 1px solid black;
+    flex-grow: 1;
+} 
