@@ -17,11 +17,13 @@ const gameboard = (() => {
             gameboardArray[row][column] = 'X';
             player1.logInput(row, column);
             e.target.textContent = gameboardArray[row][column];
+            logic.checkRound(player1.output(), row);
             round += 1;
         } else {
             gameboardArray[row][column] = 'O';
             player2.logInput(row, column);
             e.target.textContent = gameboardArray[row][column];
+            logic.checkRound(player1.output(), row);
             round += 1;
         }
     
@@ -45,11 +47,25 @@ const Player = () => {
         rowContainer[row] += 1;
     };
 
-    return {array, rowContainer, logInput};
+    const output = () => {
+        return rowContainer;
+    };
+
+    return {array, rowContainer, logInput, output};
 };
 
 const player1 = Player();
 const player2 = Player();
+
+const logic = (() => {
+    const checkRound = (output, row) => {
+        if(output[row] == 3) {
+            alert('Winner');
+        };
+    };
+
+    return {checkRound};
+})();
 
 
 
