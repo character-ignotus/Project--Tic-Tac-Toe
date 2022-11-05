@@ -22,18 +22,20 @@ const gameboard = (() => {
         let column = e.target.getAttribute('data-column');
 
         if(round % 2 == 0 && typeof gameboardArray[row][column] === 'undefined') {
+            round += 1;
             gameboardArray[row][column] = 'X';
             player1.logInput(row, column);
             e.target.textContent = gameboardArray[row][column];
-            logic.checkRound(player1.output(), row, column, 'player1');
-            round += 1;
+            logic.checkRound(player1.output(), row, column, round, 'player1');
         } else if (typeof gameboardArray[row][column] === 'undefined') {
+            round += 1;
             gameboardArray[row][column] = 'O';
             player2.logInput(row, column);
             e.target.textContent = gameboardArray[row][column];
-            logic.checkRound(player2.output(), row, column, 'player2');
-            round += 1;
+            logic.checkRound(player2.output(), row, column, round, 'player2');
         }
+
+        console.log(round);
     };
 
     return {bindEvents, clearGameboard, gameboardArray};
@@ -73,7 +75,7 @@ const player1 = Player();
 const player2 = Player();
 
 const logic = (() => {
-    const checkRound = (output, row, column, player) => {
+    const checkRound = (output, row, column, round, player) => {
         if(output[0][row] == 3) {
             alert(`${player} has won the game!`);
             gameboard.clearGameboard();
@@ -97,6 +99,13 @@ const logic = (() => {
 
         if((output[3][0] == 1) && (output[3][1] == 1) && (output[3][2] == 1)) {
             alert(`${player} has won the game!`);
+            gameboard.clearGameboard();
+            player1.clearPlayerInputs();
+            player2.clearPlayerInputs();
+        };
+
+        if(round == 9) {
+            alert(`We have a tie`);
             gameboard.clearGameboard();
             player1.clearPlayerInputs();
             player2.clearPlayerInputs();
