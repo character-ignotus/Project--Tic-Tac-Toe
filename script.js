@@ -35,26 +35,18 @@ gameboard.bindEvents();
 
 
 const Player = () => {
-    let containersArray = [];
-    let rowContainer = [0, 0, 0];
-    let columnContainer = [0, 0, 0];
-    let diagonalContainer = [0, 0, 0];
-    let inverseDiagonalContainer = [0, 0, 0];
+    let containersArray = [[0, 0, 0], [0, 0, 0], [0, 0, 0], [0, 0, 0]];
 
     const logInput = (row, column) => {
-        rowContainer[row] += 1;
-        columnContainer[column] += 1;
-        containersArray[0] = rowContainer;
-        containersArray[1] = columnContainer;
-        containersArray[2] = diagonalContainer;
-        containersArray[3] = inverseDiagonalContainer;
+        containersArray[0][row] += 1;
+        containersArray[1][column] += 1;
 
         if(row == column) {
-            diagonalContainer[row] += 1;
+            containersArray[2][row] += 1;
         }
 
         if((row == 0 && column == 2) || (row == 1 && column == 1) || (row == 2 && column == 0))  {
-            inverseDiagonalContainer[row] += 1;
+            containersArray[3][row] += 1;
         }
     };
 
@@ -62,7 +54,7 @@ const Player = () => {
         return containersArray;
     };
 
-    return {containersArray, rowContainer, logInput, output};
+    return {containersArray, logInput, output};
 };
 
 const player1 = Player();
