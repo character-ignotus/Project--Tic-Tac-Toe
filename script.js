@@ -17,19 +17,15 @@ const gameboard = (() => {
             gameboardArray[row][column] = 'X';
             player1.logInput(row, column);
             e.target.textContent = gameboardArray[row][column];
-            logic.checkRound(player1.output(), row);
+            logic.checkRound(player1.output(), row, column);
             round += 1;
         } else {
             gameboardArray[row][column] = 'O';
             player2.logInput(row, column);
             e.target.textContent = gameboardArray[row][column];
-            logic.checkRound(player1.output(), row);
+            logic.checkRound(player1.output(), row, column);
             round += 1;
         }
-    
-        console.log(gameboardArray);
-        console.log(player1.array);
-        console.log(player2.array);
     };
 
     return {bindEvents};
@@ -39,27 +35,34 @@ gameboard.bindEvents();
 
 
 const Player = () => {
-    let array = [[], [], []];
+    let containersArray = [];
     let rowContainer = [0, 0, 0];
+    let columnContainer = [0, 0, 0];
 
     const logInput = (row, column) => {
-        array[row][column] = 1;
         rowContainer[row] += 1;
+        columnContainer[column] += 1;
+        containersArray[0] = rowContainer;
+        containersArray[1] = columnContainer;
     };
 
     const output = () => {
-        return rowContainer;
+        return containersArray;
     };
 
-    return {array, rowContainer, logInput, output};
+    return {containersArray, rowContainer, logInput, output};
 };
 
 const player1 = Player();
 const player2 = Player();
 
 const logic = (() => {
-    const checkRound = (output, row) => {
-        if(output[row] == 3) {
+    const checkRound = (output, row, column) => {
+        if(output[0][row] == 3) {
+            alert('Winner');
+        };
+
+        if(output[1][column] == 3) {
             alert('Winner');
         };
     };
