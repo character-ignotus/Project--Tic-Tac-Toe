@@ -9,6 +9,14 @@ const gameboard = (() => {
         });
     };
 
+    const clearGameboard = () => {
+        gameboardArray = [[], [], []];
+        round = 0;
+        cells.forEach(cell => {
+            cell.textContent = '';
+        });
+    };
+
     function addInput(e) {
         let row = e.target.getAttribute('data-row');
         let column = e.target.getAttribute('data-column');
@@ -28,7 +36,7 @@ const gameboard = (() => {
         }
     };
 
-    return {bindEvents};
+    return {bindEvents, clearGameboard, gameboardArray};
 })();
 
 gameboard.bindEvents();
@@ -54,7 +62,11 @@ const Player = () => {
         return containersArray;
     };
 
-    return {logInput, output};
+    const clearPlayerInputs = () => {
+        containersArray = [[0, 0, 0], [0, 0, 0], [0, 0, 0], [0, 0, 0]];
+    };
+
+    return {logInput, output, clearPlayerInputs, containersArray};
 };
 
 const player1 = Player();
@@ -64,18 +76,30 @@ const logic = (() => {
     const checkRound = (output, row, column, player) => {
         if(output[0][row] == 3) {
             alert(`${player} has won the game!`);
+            gameboard.clearGameboard();
+            player1.clearPlayerInputs();
+            player2.clearPlayerInputs();
         };
 
         if(output[1][column] == 3) {
             alert(`${player} has won the game!`);
+            gameboard.clearGameboard();
+            player1.clearPlayerInputs();
+            player2.clearPlayerInputs();
         };
 
         if((output[2][0] == 1) && (output[2][1] == 1) && (output[2][2] == 1)) {
             alert(`${player} has won the game!`);
+            gameboard.clearGameboard();
+            player1.clearPlayerInputs();
+            player2.clearPlayerInputs();
         };
 
         if((output[3][0] == 1) && (output[3][1] == 1) && (output[3][2] == 1)) {
             alert(`${player} has won the game!`);
+            gameboard.clearGameboard();
+            player1.clearPlayerInputs();
+            player2.clearPlayerInputs();
         };
     };
 
