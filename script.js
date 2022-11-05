@@ -17,13 +17,13 @@ const gameboard = (() => {
             gameboardArray[row][column] = 'X';
             player1.logInput(row, column);
             e.target.textContent = gameboardArray[row][column];
-            logic.checkRound(player1.output(), row, column);
+            logic.checkRound(player1.output(), row, column, 'player1');
             round += 1;
         } else {
             gameboardArray[row][column] = 'O';
             player2.logInput(row, column);
             e.target.textContent = gameboardArray[row][column];
-            logic.checkRound(player2.output(), row, column);
+            logic.checkRound(player2.output(), row, column, 'player2');
             round += 1;
         }
     };
@@ -61,21 +61,21 @@ const player1 = Player();
 const player2 = Player();
 
 const logic = (() => {
-    const checkRound = (output, row, column) => {
+    const checkRound = (output, row, column, player) => {
         if(output[0][row] == 3) {
-            alert('Winner');
+            alert(`${player} has won the game!`);
         };
 
         if(output[1][column] == 3) {
-            alert('Winner');
+            alert(`${player} has won the game!`);
         };
 
         if((output[2][0] == 1) && (output[2][1] == 1) && (output[2][2] == 1)) {
-            alert('Winner');
+            alert(`${player} has won the game!`);
         };
 
         if((output[3][0] == 1) && (output[3][1] == 1) && (output[3][2] == 1)) {
-            alert('Winner');
+            alert(`${player} has won the game!`);
         };
     };
 
