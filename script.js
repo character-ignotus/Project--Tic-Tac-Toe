@@ -54,7 +54,7 @@ const Player = () => {
         return containersArray;
     };
 
-    return {containersArray, logInput, output};
+    return {logInput, output};
 };
 
 const player1 = Player();
