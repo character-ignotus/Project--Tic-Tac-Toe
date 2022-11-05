@@ -23,7 +23,7 @@ const gameboard = (() => {
             gameboardArray[row][column] = 'O';
             player2.logInput(row, column);
             e.target.textContent = gameboardArray[row][column];
-            logic.checkRound(player1.output(), row, column);
+            logic.checkRound(player2.output(), row, column);
             round += 1;
         }
     };
@@ -38,12 +38,19 @@ const Player = () => {
     let containersArray = [];
     let rowContainer = [0, 0, 0];
     let columnContainer = [0, 0, 0];
+    let diagonalContainer = [0, 0, 0];
 
     const logInput = (row, column) => {
         rowContainer[row] += 1;
         columnContainer[column] += 1;
         containersArray[0] = rowContainer;
         containersArray[1] = columnContainer;
+        containersArray[2] = diagonalContainer;
+
+        if(row == column) {
+            diagonalContainer[row] += 1;
+            containersArray[2] = diagonalContainer;
+        }
     };
 
     const output = () => {
@@ -63,6 +70,10 @@ const logic = (() => {
         };
 
         if(output[1][column] == 3) {
+            alert('Winner');
+        };
+
+        if((output[2][0] == 1) && (output[2][1] == 1) && (output[2][2] == 1)) {
             alert('Winner');
         };
     };
