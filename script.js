@@ -13,13 +13,13 @@ const gameboard = (() => {
         let row = e.target.getAttribute('data-row');
         let column = e.target.getAttribute('data-column');
 
-        if(round % 2 == 0) {
+        if(round % 2 == 0 && typeof gameboardArray[row][column] === 'undefined') {
             gameboardArray[row][column] = 'X';
             player1.logInput(row, column);
             e.target.textContent = gameboardArray[row][column];
             logic.checkRound(player1.output(), row, column, 'player1');
             round += 1;
-        } else {
+        } else if (typeof gameboardArray[row][column] === 'undefined') {
             gameboardArray[row][column] = 'O';
             player2.logInput(row, column);
             e.target.textContent = gameboardArray[row][column];
