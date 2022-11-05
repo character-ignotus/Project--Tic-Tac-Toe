@@ -39,6 +39,7 @@ const Player = () => {
     let rowContainer = [0, 0, 0];
     let columnContainer = [0, 0, 0];
     let diagonalContainer = [0, 0, 0];
+    let inverseDiagonalContainer = [0, 0, 0];
 
     const logInput = (row, column) => {
         rowContainer[row] += 1;
@@ -46,10 +47,14 @@ const Player = () => {
         containersArray[0] = rowContainer;
         containersArray[1] = columnContainer;
         containersArray[2] = diagonalContainer;
+        containersArray[3] = inverseDiagonalContainer;
 
         if(row == column) {
             diagonalContainer[row] += 1;
-            containersArray[2] = diagonalContainer;
+        }
+
+        if((row == 0 && column == 2) || (row == 1 && column == 1) || (row == 2 && column == 0))  {
+            inverseDiagonalContainer[row] += 1;
         }
     };
 
@@ -74,6 +79,10 @@ const logic = (() => {
         };
 
         if((output[2][0] == 1) && (output[2][1] == 1) && (output[2][2] == 1)) {
+            alert('Winner');
+        };
+
+        if((output[3][0] == 1) && (output[3][1] == 1) && (output[3][2] == 1)) {
             alert('Winner');
         };
     };
