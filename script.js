@@ -9,6 +9,14 @@ const gameboard = (() => {
         });
     };
 
+    function logRound(player, index, row, column, e, winner) {
+        round += 1;
+        gameboardArray[row][column] = index;
+        player.logInput(row, column);
+        e.target.textContent = gameboardArray[row][column];
+        logic.checkRound(player.output(), row, column, round, `${winner}`);
+    };
+
     const clearGameboard = () => {
         gameboardArray = [[], [], []];
         round = 0;
@@ -22,20 +30,13 @@ const gameboard = (() => {
         let column = e.target.getAttribute('data-column');
 
         if(round % 2 == 0 && typeof gameboardArray[row][column] === 'undefined') {
-            round += 1;
-            gameboardArray[row][column] = 'X';
-            player1.logInput(row, column);
-            e.target.textContent = gameboardArray[row][column];
-            logic.checkRound(player1.output(), row, column, round, 'player1');
+            logRound(player1, 'X', row, column, e, 'player1');
         } else if (typeof gameboardArray[row][column] === 'undefined') {
-            round += 1;
-            gameboardArray[row][column] = 'O';
-            player2.logInput(row, column);
-            e.target.textContent = gameboardArray[row][column];
-            logic.checkRound(player2.output(), row, column, round, 'player2');
+            logRound(player2, 'O', row, column, e, 'player2');
         }
 
         console.log(round);
+        console.log(gameboardArray);
     };
 
     return {bindEvents, clearGameboard, gameboardArray};
@@ -119,7 +120,3 @@ const logic = (() => {
 
     return {checkRound};
 })();
-
-
-
-
