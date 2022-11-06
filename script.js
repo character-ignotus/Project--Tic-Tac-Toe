@@ -76,44 +76,40 @@ const player1 = Player();
 const player2 = Player();
 
 const logic = (() => {
+    function clearGameBoard() {
+        gameboard.clearGameboard();
+        player1.clearPlayerInputs();
+        player2.clearPlayerInputs();
+    };
+
     const checkRound = (output, row, column, round, player) => {
         if(output[0][row] == 3) {
             alert(`${player} has won the game!`);
-            gameboard.clearGameboard();
-            player1.clearPlayerInputs();
-            player2.clearPlayerInputs();
+            clearGameBoard();
             return
         };
 
         if(output[1][column] == 3) {
             alert(`${player} has won the game!`);
-            gameboard.clearGameboard();
-            player1.clearPlayerInputs();
-            player2.clearPlayerInputs();
+            clearGameBoard();
             return
         };
 
         if((output[2][0] == 1) && (output[2][1] == 1) && (output[2][2] == 1)) {
             alert(`${player} has won the game!`);
-            gameboard.clearGameboard();
-            player1.clearPlayerInputs();
-            player2.clearPlayerInputs();
+            clearGameBoard();
             return
         };
 
         if((output[3][0] == 1) && (output[3][1] == 1) && (output[3][2] == 1)) {
             alert(`${player} has won the game!`);
-            gameboard.clearGameboard();
-            player1.clearPlayerInputs();
-            player2.clearPlayerInputs();
+            clearGameBoard();
             return
         };
 
         if(round == 9) {
             alert(`We have a tie`);
-            gameboard.clearGameboard();
-            player1.clearPlayerInputs();
-            player2.clearPlayerInputs();
+            clearGameBoard();
             return
         };
     };
