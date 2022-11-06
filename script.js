@@ -81,6 +81,7 @@ const logic = (() => {
             gameboard.clearGameboard();
             player1.clearPlayerInputs();
             player2.clearPlayerInputs();
+            return
         };
 
         if(output[1][column] == 3) {
@@ -88,6 +89,7 @@ const logic = (() => {
             gameboard.clearGameboard();
             player1.clearPlayerInputs();
             player2.clearPlayerInputs();
+            return
         };
 
         if((output[2][0] == 1) && (output[2][1] == 1) && (output[2][2] == 1)) {
@@ -95,6 +97,7 @@ const logic = (() => {
             gameboard.clearGameboard();
             player1.clearPlayerInputs();
             player2.clearPlayerInputs();
+            return
         };
 
         if((output[3][0] == 1) && (output[3][1] == 1) && (output[3][2] == 1)) {
@@ -102,6 +105,7 @@ const logic = (() => {
             gameboard.clearGameboard();
             player1.clearPlayerInputs();
             player2.clearPlayerInputs();
+            return
         };
 
         if(round == 9) {
@@ -109,6 +113,7 @@ const logic = (() => {
             gameboard.clearGameboard();
             player1.clearPlayerInputs();
             player2.clearPlayerInputs();
+            return
         };
     };
 
