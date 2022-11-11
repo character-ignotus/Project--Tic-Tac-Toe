@@ -116,3 +116,25 @@ const logic = (() => {
 
     return {checkRound};
 })();
+
+const computer = (() => {
+    let computerStatus = false;
+    let containersArray = [[0, 0, 0], [0, 0, 0], [0, 0, 0], [0, 0, 0]];
+
+    function logInput(row, column) {
+        containersArray[0][row] += 1;
+        containersArray[1][column] += 1;
+
+        if(row == column) {
+            containersArray[2][row] += 1;
+        }
+
+        if((row == 0 && column == 2) || (row == 1 && column == 1) || (row == 2 && column == 0))  {
+            containersArray[3][row] += 1;
+        }
+    };
+
+    const clearComputerInputs = () => {
+        containersArray = [[0, 0, 0], [0, 0, 0], [0, 0, 0], [0, 0, 0]];
+    };
+})();
