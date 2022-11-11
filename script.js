@@ -1,50 +1,3 @@
-const gameboard = (() => {
-    let gameboardArray = [[], [], []];
-    let round = 0;
-    const cells = Array.from(document.querySelectorAll('.cell'));
-
-    const bindEvents = () => {
-        cells.forEach(cell => {
-            cell.addEventListener('click', addInput);
-        });
-    };
-
-    function logRound(player, index, row, column, e, winner) {
-        round += 1;
-        gameboardArray[row][column] = index;
-        player.logInput(row, column);
-        e.target.textContent = gameboardArray[row][column];
-        logic.checkRound(player.output(), row, column, round, `${winner}`);
-    };
-
-    const clearGameboard = () => {
-        gameboardArray = [[], [], []];
-        round = 0;
-        cells.forEach(cell => {
-            cell.textContent = '';
-        });
-    };
-
-    function addInput(e) {
-        let row = e.target.getAttribute('data-row');
-        let column = e.target.getAttribute('data-column');
-
-        if(round % 2 == 0 && typeof gameboardArray[row][column] === 'undefined') {
-            logRound(player1, 'X', row, column, e, 'player1');
-        } else if (typeof gameboardArray[row][column] === 'undefined') {
-            logRound(player2, 'O', row, column, e, 'player2');
-        }
-
-        console.log(round);
-        console.log(gameboardArray);
-    };
-
-    return {bindEvents, clearGameboard, gameboardArray};
-})();
-
-gameboard.bindEvents();
-
-
 const Player = () => {
     let containersArray = [[0, 0, 0], [0, 0, 0], [0, 0, 0], [0, 0, 0]];
 
@@ -80,6 +33,7 @@ const logic = (() => {
         gameboard.clearGameboard();
         player1.clearPlayerInputs();
         player2.clearPlayerInputs();
+        computer.clearComputerInputs();
     };
 
     const checkRound = (output, row, column, round, player) => {
@@ -118,7 +72,7 @@ const logic = (() => {
 })();
 
 const computer = (() => {
-    let computerStatus = false;
+    let computerStatus = true;
     let containersArray = [[0, 0, 0], [0, 0, 0], [0, 0, 0], [0, 0, 0]];
 
     function logInput(row, column) {
@@ -137,4 +91,96 @@ const computer = (() => {
     const clearComputerInputs = () => {
         containersArray = [[0, 0, 0], [0, 0, 0], [0, 0, 0], [0, 0, 0]];
     };
+
+    const computerChoice = (round) => {
+        let row = Math.floor(Math.random() * 3);
+        let column = Math.floor(Math.random() * 3);
+
+        if(typeof gameboard.cellCheck(row, column) === 'undefined') {
+            let cell = document.querySelector(`[data-row-column="${row}${column}"]`);
+            cell.textContent = 'O';
+
+            gameboard.logInput(row, column, 'O');
+            logInput(row, column);
+            logic.checkRound(containersArray, row, column, round, `computer`);
+
+            console.log(containersArray);
+        } else {
+            computerChoice(round);
+        }
+    };
+
+    return {computerStatus, containersArray, computerChoice, clearComputerInputs};
 })();
+
+const gameboard = (() => {
+    let gameboardArray = [[], [], []];
+    let round = 0;
+    const cells = Array.from(document.querySelectorAll('.cell'));
+
+    const bindEvents = () => {
+        cells.forEach(cell => {
+            if(computer.computerStatus == true) {
+                cell.addEventListener('click', playerVScomputer);
+            } else {
+                cell.addEventListener('click', playerVSplayer);
+            };
+        });
+    };
+
+    function logRound(player, index, row, column, e, winner) {
+        round += 1;
+        gameboardArray[row][column] = index;
+        player.logInput(row, column);
+        e.target.textContent = gameboardArray[row][column];
+        logic.checkRound(player.output(), row, column, round, `${winner}`);
+    };
+
+    const cellCheck = (row, column) => {
+        return gameboardArray[row][column];
+    };
+
+    const logInput = (row, column, index) => {
+        gameboardArray[row][column] = index;
+    };
+
+    const clearGameboard = () => {
+        gameboardArray = [[], [], []];
+        round = 0;
+        cells.forEach(cell => {
+            cell.textContent = '';
+        });
+    };
+
+    function playerVSplayer(e) {
+        let row = e.target.getAttribute('data-row');
+        let column = e.target.getAttribute('data-column');
+
+        if(round % 2 == 0 && typeof gameboardArray[row][column] === 'undefined') {
+            logRound(player1, 'X', row, column, e, 'player1');
+        } else if (typeof gameboardArray[row][column] === 'undefined') {
+            logRound(player2, 'O', row, column, e, 'player2');
+        }
+
+        console.log(round);
+        console.log(gameboardArray);
+    };
+
+    function playerVScomputer(e) {
+        let row = e.target.getAttribute('data-row');
+        let column = e.target.getAttribute('data-column');
+
+        logRound(player1, 'X', row, column, e, 'player1');
+        if(!round == 0) {
+            computer.computerChoice(round);
+            round += 1;
+        };
+
+        console.log(round);
+        console.log(gameboardArray);
+    };
+
+    return {bindEvents, clearGameboard, gameboardArray, cellCheck, logInput};
+})();
+
+gameboard.bindEvents();
