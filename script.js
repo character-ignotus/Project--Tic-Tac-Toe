@@ -177,14 +177,16 @@ const gameboard = (() => {
         let row = e.target.getAttribute('data-row');
         let column = e.target.getAttribute('data-column');
 
-        logRound(player1, 'X', row, column, e, 'player1');
-        if(!round == 0) {
-            computer.computerChoice(round);
-            round += 1;
+        if(e.target.textContent == '') {
+            logRound(player1, 'X', row, column, e, 'player1');
+            if(!round == 0) {
+                computer.computerChoice(round);
+                round += 1;
+            };
+            
+            console.log(round);
+            console.log(gameboardArray);
         };
-
-        console.log(round);
-        console.log(gameboardArray);
     };
 
     return {bindEvents, clearGameboard, gameboardArray, cellCheck, logInput};
