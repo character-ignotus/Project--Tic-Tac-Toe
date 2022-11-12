@@ -93,21 +93,28 @@ const computer = (() => {
     };
 
     const computerChoice = (round) => {
-        let row = Math.floor(Math.random() * 3);
-        let column = Math.floor(Math.random() * 3);
+        let availableCells = [];
 
-        if(typeof gameboard.cellCheck(row, column) === 'undefined') {
-            let cell = document.querySelector(`[data-row-column="${row}${column}"]`);
-            cell.textContent = 'O';
-
-            gameboard.logInput(row, column, 'O');
-            logInput(row, column);
-            logic.checkRound(containersArray, row, column, round, `computer`);
-
-            console.log(containersArray);
-        } else {
-            computerChoice(round);
+        for(i = 0; i < 3; i++ ) {
+            for(j = 0; j < 3; j++) {
+                if(typeof gameboard.cellCheck(i, j) === 'undefined') {
+                    availableCells.push([i, j]);
+                } 
+            }
         }
+        
+        let random = Math.floor(Math.random() * (9 - round ));
+        let move = availableCells[random]
+
+        console.log(availableCells);
+        console.log(move);
+
+        let cell = document.querySelector(`[data-row-column="${move[0]}${move[1]}"]`);
+        cell.textContent = 'O';
+
+        gameboard.logInput(move[0], move[1], 'O');
+        logInput(move[0], move[1]);
+        logic.checkRound(containersArray, move[0], move[1], round, `computer`);
     };
 
     return {computerStatus, containersArray, computerChoice, clearComputerInputs};
