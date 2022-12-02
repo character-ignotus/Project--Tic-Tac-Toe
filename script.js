@@ -170,3 +170,55 @@ const gameboard = (() => {
 })();
 
 gameboard.bindEvents();
+
+//Minimax algorithm
+function minimax(board, isMaximazing) {
+    let result = checkForWinner.check();
+    
+    if(result !== null) {
+        let score = gameboard.returnScores()[result];
+        return score;
+    };
+
+    if(isMaximazing) {
+        let optimalScore = -Infinity;
+        for(let i = 0; i < 3; i++ ) {
+            for(let j = 0; j < 3; j++) {
+                if(typeof board[i][j] === 'undefined' || board[i][j] === '') {
+                    let k = i;
+                    let l = j;
+                    gameboard.logComputerRound(i, j, 'X');
+                    gameboard.increaseRound();
+                    let score = minimax(board, false);
+                    // Clear board and return actual round
+                    gameboard.logComputerRound(i, j, '');
+                    gameboard.decreaseRound();
+                    if(score > optimalScore) {
+                        optimalScore = score;
+                    };
+                }; 
+            };
+        };
+        return optimalScore;
+    } else {
+        let optimalScore = Infinity;
+        for(let i = 0; i < 3; i++ ) {
+            for(let j = 0; j < 3; j++) {
+                if(typeof board[i][j] === 'undefined' || board[i][j] === '') {
+                    let k = i;
+                    let l = j;
+                    gameboard.logComputerRound(i, j, 'O');
+                    gameboard.increaseRound();
+                    let score = minimax(board, true);
+                    // Clear board and return actual round
+                    gameboard.logComputerRound(i, j, '');
+                    gameboard.decreaseRound();
+                    if(score < optimalScore) {
+                        optimalScore = score;
+                    };
+                }; 
+            };
+        };
+        return optimalScore;
+    }
+};
