@@ -101,14 +101,21 @@ const computer = (() => {
     return {computerStatus, containersArray, computerChoice, clearComputerInputs};
 })();
 
+// Gameboard object
 const gameboard = (() => {
-    let gameboardArray = [[], [], []];
+    let board = [[], [], []];
     let round = 0;
+    let scores = {
+        'player': 1,
+        'computer': -1,
+        'tie': 0
+    };
+
     const cells = Array.from(document.querySelectorAll('.cell'));
 
     const bindEvents = () => {
         cells.forEach(cell => {
-            if(computer.computerStatus == true) {
+            if(computer.returnStatus() === true) {
                 cell.addEventListener('click', playerVScomputer);
             } else {
                 cell.addEventListener('click', playerVSplayer);
@@ -116,42 +123,38 @@ const gameboard = (() => {
         });
     };
 
-    function logRound(player, index, row, column, e, winner) {
+    function logPlayerRound(row, column, e, index) {
+        board[row][column] = index;
+        e.target.textContent = board[row][column];
+        let result = checkForWinner.check();
+        if(result !== null) {
+            alert(`${result} has won!`);
+        };
         round += 1;
-        gameboardArray[row][column] = index;
-        player.logInput(row, column);
-        e.target.textContent = gameboardArray[row][column];
-        logic.checkRound(player.output(), row, column, round, `${winner}`);
     };
 
-    const cellCheck = (row, column) => {
-        return gameboardArray[row][column];
+    const logComputerRound = (row, column, index) => {
+        board[row][column] = index;
     };
 
-    const logInput = (row, column, index) => {
-        gameboardArray[row][column] = index;
+    const increaseRound = () => {
+        round += 1;
     };
 
-    const clearGameboard = () => {
-        gameboardArray = [[], [], []];
-        round = 0;
-        cells.forEach(cell => {
-            cell.textContent = '';
-        });
+    const decreaseRound = () => {
+        round -= 1;
     };
 
-    function playerVSplayer(e) {
-        let row = e.target.getAttribute('data-row');
-        let column = e.target.getAttribute('data-column');
+    const returnBoard = () => {
+        return board;
+    };
 
-        if(round % 2 == 0 && typeof gameboardArray[row][column] === 'undefined') {
-            logRound(player1, 'X', row, column, e, 'player1');
-        } else if (typeof gameboardArray[row][column] === 'undefined') {
-            logRound(player2, 'O', row, column, e, 'player2');
-        }
+    const returnRound = () => {
+        return round;
+    };
 
-        console.log(round);
-        console.log(gameboardArray);
+    const returnScores = () => {
+        return scores;
     };
 
     function playerVScomputer(e) {
@@ -159,18 +162,28 @@ const gameboard = (() => {
         let column = e.target.getAttribute('data-column');
 
         if(e.target.textContent == '') {
-            logRound(player1, 'X', row, column, e, 'player1');
-            if(!round == 0) {
-                computer.computerChoice(round);
-                round += 1;
+            logPlayerRound(row, column, e, 'X');
+            computer.computerMove(board);
+            let result = checkForWinner.check();
+            if(result !== null) {
+                alert(`${result} has won!`);
             };
-            
-            console.log(round);
-            console.log(gameboardArray);
+            round += 1;
         };
     };
 
-    return {bindEvents, clearGameboard, gameboardArray, cellCheck, logInput};
+    function playerVSplayer(e) {
+        let row = e.target.getAttribute('data-row');
+        let column = e.target.getAttribute('data-column');
+
+        if(round % 2 == 0 && typeof board[row][column] === 'undefined') {
+            logPlayerRound(row, column, e, 'X');
+        } else if (typeof board[row][column] === 'undefined') {
+            logPlayerRound(row, column, e, 'O');
+        };
+    };
+
+    return {bindEvents, logComputerRound, returnBoard, returnRound, increaseRound, decreaseRound, returnScores};
 })();
 
 gameboard.bindEvents();
