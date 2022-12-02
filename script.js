@@ -16,6 +16,38 @@ const Player = () => {
 const player1 = Player();
 player1.getName();
 
+// Computer Object
+const computer = (() => {
+    const computerStatus = true;
+
+    const computerMove = (board) => {
+        let optimalScore = Infinity;
+        let optimalMove;
+        for(let i = 0; i < 3; i++ ) {
+            for(let j = 0; j < 3; j++) {
+                if(typeof board[i][j] === 'undefined' || board[i][j] === '') {
+                    gameboard.logComputerRound(i, j, 'O');
+                    let score = minimax(board, true);
+                    gameboard.logComputerRound(i, j, '');
+                    if(score < optimalScore) {
+                        optimalScore = score;
+                        optimalMove = [i, j];
+                    }
+                } 
+            }
+        };
+        let cell = document.querySelector(`[data-row-column="${optimalMove[0]}${optimalMove[1]}"]`);
+        cell.textContent = 'O';
+        gameboard.logComputerRound(optimalMove[0], optimalMove[1], 'O');
+    };
+
+    const returnStatus = () => {
+        return computerStatus;
+    };
+
+    return {computerMove, returnStatus};
+})();
+
 // Object that checks for a winner
 const checkForWinner = (() => {
     const check = () => {
@@ -50,55 +82,6 @@ const checkForWinner = (() => {
     };
 
     return {check};
-})();
-
-const computer = (() => {
-    let computerStatus = true;
-    let containersArray = [[0, 0, 0], [0, 0, 0], [0, 0, 0], [0, 0, 0]];
-
-    function logInput(row, column) {
-        containersArray[0][row] += 1;
-        containersArray[1][column] += 1;
-
-        if(row == column) {
-            containersArray[2][row] += 1;
-        }
-
-        if((row == 0 && column == 2) || (row == 1 && column == 1) || (row == 2 && column == 0))  {
-            containersArray[3][row] += 1;
-        }
-    };
-
-    const clearComputerInputs = () => {
-        containersArray = [[0, 0, 0], [0, 0, 0], [0, 0, 0], [0, 0, 0]];
-    };
-
-    const computerChoice = (round) => {
-        let availableCells = [];
-
-        for(i = 0; i < 3; i++ ) {
-            for(j = 0; j < 3; j++) {
-                if(typeof gameboard.cellCheck(i, j) === 'undefined') {
-                    availableCells.push([i, j]);
-                } 
-            }
-        }
-        
-        let random = Math.floor(Math.random() * (9 - round ));
-        let move = availableCells[random]
-
-        console.log(availableCells);
-        console.log(move);
-
-        let cell = document.querySelector(`[data-row-column="${move[0]}${move[1]}"]`);
-        cell.textContent = 'O';
-
-        gameboard.logInput(move[0], move[1], 'O');
-        logInput(move[0], move[1]);
-        logic.checkRound(containersArray, move[0], move[1], round, `computer`);
-    };
-
-    return {computerStatus, containersArray, computerChoice, clearComputerInputs};
 })();
 
 // Gameboard object
