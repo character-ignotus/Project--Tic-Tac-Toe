@@ -16,47 +16,40 @@ const Player = () => {
 const player1 = Player();
 player1.getName();
 
-const logic = (() => {
-    function clearGameBoard() {
-        gameboard.clearGameboard();
-        player1.clearPlayerInputs();
-        player2.clearPlayerInputs();
-        computer.clearComputerInputs();
+// Object that checks for a winner
+const checkForWinner = (() => {
+    const check = () => {
+        let currentBoard = gameboard.returnBoard();
+        let currentRound = gameboard.returnRound();
+        let currentPlayer;
+        let currentIndex;
+
+        if(currentRound%2 == 0) {
+            currentPlayer = 'player';
+            currentIndex = 'X';
+        } else {
+            currentPlayer = 'computer';
+            currentIndex = 'O';
+        };
+
+        for(i=0; i<3; i++) {
+            if (helperFunctions.equals(currentBoard, i, 0, i, 1, i, 2, currentIndex)) return currentPlayer;
+        };
+
+        for(i=0; i<3; i++) {
+            if (helperFunctions.equals(currentBoard, 0, i, 1, i, 2, i, currentIndex)) return currentPlayer;
+        };
+
+        if (helperFunctions.equals(currentBoard, 0, 0, 1, 1, 2, 2, currentIndex)) return currentPlayer;
+
+        if (helperFunctions.equals(currentBoard, 0, 2, 1, 1, 2, 0, currentIndex)) return currentPlayer;
+
+        if(currentRound == 8) return 'tie';
+
+        return null;
     };
 
-    const checkRound = (output, row, column, round, player) => {
-        if(output[0][row] == 3) {
-            alert(`${player} has won the game!`);
-            clearGameBoard();
-            return
-        };
-
-        if(output[1][column] == 3) {
-            alert(`${player} has won the game!`);
-            clearGameBoard();
-            return
-        };
-
-        if((output[2][0] == 1) && (output[2][1] == 1) && (output[2][2] == 1)) {
-            alert(`${player} has won the game!`);
-            clearGameBoard();
-            return
-        };
-
-        if((output[3][0] == 1) && (output[3][1] == 1) && (output[3][2] == 1)) {
-            alert(`${player} has won the game!`);
-            clearGameBoard();
-            return
-        };
-
-        if(round == 9) {
-            alert(`We have a tie`);
-            clearGameBoard();
-            return
-        };
-    };
-
-    return {checkRound};
+    return {check};
 })();
 
 const computer = (() => {
