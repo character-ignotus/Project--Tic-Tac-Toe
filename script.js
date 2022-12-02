@@ -222,3 +222,13 @@ function minimax(board, isMaximazing) {
         return optimalScore;
     }
 };
+
+const helperFunctions = (() => {
+    const equals = (args, a, b, c, d, e, f, g) => {
+        if(args[a][b] == g && args[c][d] == g && args[e][f] == g) {
+            return true;
+        };
+    };
+
+    return {equals};
+})();
