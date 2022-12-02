@@ -14,7 +14,7 @@ const Player = () => {
 };
 
 const player1 = Player();
-player1.getName();
+const player2 = Player();
 
 // Computer Object
 const computer = (() => {
@@ -56,12 +56,22 @@ const checkForWinner = (() => {
         let currentPlayer;
         let currentIndex;
 
-        if(currentRound%2 == 0) {
-            currentPlayer = 'player';
-            currentIndex = 'X';
+        if (computer.returnStatus()) {
+            if(currentRound%2 == 0) {
+                currentPlayer = 'player';
+                currentIndex = 'X';
+            } else {
+                currentPlayer = 'computer';
+                currentIndex = 'O';
+            } 
         } else {
-            currentPlayer = 'computer';
-            currentIndex = 'O';
+            if(currentRound%2 == 0) {
+                currentPlayer = player1.returnName();
+                currentIndex = 'X';
+            } else {
+                currentPlayer = player2.returnName();
+                currentIndex = 'O';
+            } 
         };
 
         for(i=0; i<3; i++) {
@@ -230,5 +240,16 @@ const helperFunctions = (() => {
         };
     };
 
-    return {equals};
+    const gameMode = () => {
+        if(!computer.returnStatus()) {
+            player1.getName();
+            player2.getName();
+        } else {
+            player1.getName();
+        };
+    };
+
+    return {equals, gameMode};
 })();
+
+helperFunctions.gameMode()
