@@ -1,32 +1,20 @@
+// Player Object
 const Player = () => {
-    let containersArray = [[0, 0, 0], [0, 0, 0], [0, 0, 0], [0, 0, 0]];
+    let playerName;
 
-    const logInput = (row, column) => {
-        containersArray[0][row] += 1;
-        containersArray[1][column] += 1;
-
-        if(row == column) {
-            containersArray[2][row] += 1;
-        }
-
-        if((row == 0 && column == 2) || (row == 1 && column == 1) || (row == 2 && column == 0))  {
-            containersArray[3][row] += 1;
-        }
+    const getName = () => {
+        playerName = prompt('Enter your name');
     };
 
-    const output = () => {
-        return containersArray;
+    const returnName = () => {
+        return playerName;
     };
 
-    const clearPlayerInputs = () => {
-        containersArray = [[0, 0, 0], [0, 0, 0], [0, 0, 0], [0, 0, 0]];
-    };
-
-    return {logInput, output, clearPlayerInputs, containersArray};
+    return {getName, returnName};
 };
 
 const player1 = Player();
-const player2 = Player();
+player1.getName();
 
 const logic = (() => {
     function clearGameBoard() {
