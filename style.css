@@ -7,6 +7,23 @@
     list-style: none;
 }
 
+body {
+    min-height: 100vh;
+    display: grid;
+}
+
+.announcement-section {
+    grid-row: 1/2;
+}
+
+.main-section {
+    grid-row: 2/3;
+}
+
+.button-section {
+    grid-row: 3/4;
+}
+
 .gameboard {
     width: 500px;
     height: 500px;
