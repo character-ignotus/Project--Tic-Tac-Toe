@@ -38,8 +38,38 @@
         </div>
     </div>
     <div class="button-section">
-        <button>Restart</button>
+        <button class="restart-btn">Restart</button>
         <button>Change Mode</button>
+
+        <dialog class="modal-1">
+            <form action="get" method="dialog">
+                  <button type="button" class="close-button-1">X</button>
+              <div class="inputs">
+                  <div>
+                      <label for="player-one">PLAYER 1 NAME:</label>
+                      <input type="text" name="player-one" id="playerOne" required>
+                  </div>
+                  <div>
+                      <label for="player-two">PLAYER 2 NAME:</label>
+                      <input type="text" name="player-two" id="playerTwo" required>
+                  </div>
+              </div>
+              <button type="submit" class="submit-player-names">Submit Players Names</button>
+            </form>
+          </dialog>
+
+          <dialog class="modal-2">
+            <form action="get" method="dialog">
+                  <button type="button" class="close-button-2">X</button>
+              <div class="inputs">
+                  <div>
+                      <label for="player">PLAYER NAME:</label>
+                      <input type="text" name="player" id="player" required>
+                  </div>
+              </div>
+              <button type="submit" class="submit-player-name">Submit Player Name</button>
+            </form>
+          </dialog>
     </div>
 </body>
 </html>

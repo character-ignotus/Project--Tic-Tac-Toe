@@ -2,8 +2,8 @@
 const Player = () => {
     let playerName;
 
-    const getName = () => {
-        playerName = prompt('Enter your name');
+    const getName = (name) => {
+        playerName = name;
     };
 
     const returnName = () => {
@@ -18,7 +18,7 @@ const player2 = Player();
 
 // Computer Object
 const computer = (() => {
-    const computerStatus = true;
+    const computerStatus = false;
 
     const computerMove = (board) => {
         let optimalScore = Infinity;
@@ -196,8 +196,6 @@ const algorithm = (() => {
             for(let i = 0; i < 3; i++ ) {
                 for(let j = 0; j < 3; j++) {
                     if(typeof board[i][j] === 'undefined' || board[i][j] === '') {
-                        let k = i;
-                        let l = j;
                         gameboard.logComputerRound(i, j, 'X');
                         gameboard.increaseRound();
                         let score = minimax(board, false);
@@ -216,8 +214,6 @@ const algorithm = (() => {
             for(let i = 0; i < 3; i++ ) {
                 for(let j = 0; j < 3; j++) {
                     if(typeof board[i][j] === 'undefined' || board[i][j] === '') {
-                        let k = i;
-                        let l = j;
                         gameboard.logComputerRound(i, j, 'O');
                         gameboard.increaseRound();
                         let score = minimax(board, true);
@@ -244,16 +240,59 @@ const helperFunctions = (() => {
         };
     };
 
-    const gameMode = () => {
-        if(!computer.returnStatus()) {
-            player1.getName();
-            player2.getName();
-        } else {
-            player1.getName();
-        };
-    };
+    // const gameMode = () => {
+    //     if(!computer.returnStatus()) {
+    //         player1.getName();
+    //         player2.getName();
+    //     } else {
+    //         player1.getName();
+    //     };
+    // };
 
-    return {equals, gameMode};
+    return {equals};
 })();
 
-helperFunctions.gameMode()
+// DOM Manipulation
+const modalOne = document.querySelector('.modal-1');
+const modalTwo = document.querySelector('.modal-2');
+const restartBtn = document.querySelector('.restart-btn');
+const playerInput = document.querySelector('#player')
+const playerOneInput = document.querySelector('#playerOne');
+const playerTwoInput = document.querySelector('#playerTwo');
+const submitBtnOne = document.querySelector('.submit-player-names');
+const submitBtnTwo = document.querySelector('.submit-player-name');
+const closeModalOne = document.querySelector('.close-button-1');
+const closeModalTwo = document.querySelector('.close-button-2');
+
+if(submitBtnOne) {
+    submitBtnOne.addEventListener('click', () => {
+        if(playerOneInput.value !== '' && playerTwoInput.value !== '') {
+            player1.getName(playerOneInput.value);
+            player2.getName(playerTwoInput.value);
+        };
+    });
+};
+
+if(submitBtnTwo) {
+    submitBtnTwo.addEventListener('click', () => {
+        if(playerOneInput.value !== '' && playerTwoInput.value !== '') {
+            player1.getName(playerInput.value);
+        };
+    });
+};
+
+restartBtn.addEventListener('click', () => {
+    if(!computer.returnStatus()) {
+        modalOne.showModal();
+    } else {
+        modalTwo.showModal();
+    };
+});
+
+closeModalOne.addEventListener('click', () => {
+    modalOne.close();
+});
+
+closeModalTwo.addEventListener('click', () => {
+    modalTwo.close();
+});
