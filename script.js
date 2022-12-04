@@ -18,7 +18,7 @@ const player2 = Player();
 
 // Computer Object
 const computer = (() => {
-    const computerStatus = false;
+    const computerStatus = true;
 
     const computerMove = (board) => {
         let optimalScore = Infinity;
@@ -176,7 +176,15 @@ const gameboard = (() => {
         };
     };
 
-    return {bindEvents, logComputerRound, returnBoard, returnRound, increaseRound, decreaseRound, returnScores};
+    const restartBoard = () => {
+        board = [[], [], []];
+        round = 0;
+        cells.forEach(cell => {
+            cell.textContent = '';
+        });
+    };
+
+    return {bindEvents, logComputerRound, returnBoard, returnRound, increaseRound, decreaseRound, returnScores, restartBoard};
 })();
 
 gameboard.bindEvents();
@@ -269,14 +277,16 @@ if(submitBtnOne) {
         if(playerOneInput.value !== '' && playerTwoInput.value !== '') {
             player1.getName(playerOneInput.value);
             player2.getName(playerTwoInput.value);
+            gameboard.restartBoard();
         };
     });
 };
 
 if(submitBtnTwo) {
     submitBtnTwo.addEventListener('click', () => {
-        if(playerOneInput.value !== '' && playerTwoInput.value !== '') {
+        if(playerInput.value !== '') {
             player1.getName(playerInput.value);
+            gameboard.restartBoard();
         };
     });
 };
