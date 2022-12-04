@@ -18,7 +18,7 @@ const player2 = Player();
 
 // Computer Object
 const computer = (() => {
-    const computerStatus = true;
+    const computerStatus = false;
 
     const computerMove = (board) => {
         let optimalScore = Infinity;
@@ -45,7 +45,7 @@ const computer = (() => {
         return computerStatus;
     };
 
-    return {computerMove, returnStatus};
+    return {computerMove, returnStatus, computerStatus};
 })();
 
 // Object that checks for a winner
@@ -248,15 +248,6 @@ const helperFunctions = (() => {
         };
     };
 
-    // const gameMode = () => {
-    //     if(!computer.returnStatus()) {
-    //         player1.getName();
-    //         player2.getName();
-    //     } else {
-    //         player1.getName();
-    //     };
-    // };
-
     return {equals};
 })();
 
@@ -264,13 +255,22 @@ const helperFunctions = (() => {
 const modalOne = document.querySelector('.modal-1');
 const modalTwo = document.querySelector('.modal-2');
 const restartBtn = document.querySelector('.restart-btn');
-const playerInput = document.querySelector('#player')
+const gameModeBtn = document.querySelector('.game-mode');
+const playerInput = document.querySelector('#player');
 const playerOneInput = document.querySelector('#playerOne');
 const playerTwoInput = document.querySelector('#playerTwo');
 const submitBtnOne = document.querySelector('.submit-player-names');
 const submitBtnTwo = document.querySelector('.submit-player-name');
 const closeModalOne = document.querySelector('.close-button-1');
 const closeModalTwo = document.querySelector('.close-button-2');
+
+gameModeBtn.addEventListener('click',  () => {
+    if(!computer.returnStatus()) {
+        modalOne.showModal();
+    } else {
+        modalTwo.showModal();
+    };
+});
 
 if(submitBtnOne) {
     submitBtnOne.addEventListener('click', () => {
@@ -292,11 +292,7 @@ if(submitBtnTwo) {
 };
 
 restartBtn.addEventListener('click', () => {
-    if(!computer.returnStatus()) {
-        modalOne.showModal();
-    } else {
-        modalTwo.showModal();
-    };
+    gameboard.restartBoard();
 });
 
 closeModalOne.addEventListener('click', () => {
