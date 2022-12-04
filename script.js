@@ -252,53 +252,62 @@ const helperFunctions = (() => {
 })();
 
 // DOM Manipulation
-const modalOne = document.querySelector('.modal-1');
-const modalTwo = document.querySelector('.modal-2');
-const restartBtn = document.querySelector('.restart-btn');
-const gameModeBtn = document.querySelector('.game-mode');
-const playerInput = document.querySelector('#player');
-const playerOneInput = document.querySelector('#playerOne');
-const playerTwoInput = document.querySelector('#playerTwo');
-const submitBtnOne = document.querySelector('.submit-player-names');
-const submitBtnTwo = document.querySelector('.submit-player-name');
-const closeModalOne = document.querySelector('.close-button-1');
-const closeModalTwo = document.querySelector('.close-button-2');
+const domObject = (() => {
+    const modalOne = document.querySelector('.modal-1');
+    const modalTwo = document.querySelector('.modal-2');
+    const gameModeBtn = document.querySelector('.game-mode');
+    const restartBtn = document.querySelector('.restart-btn');
+    const playerInput = document.querySelector('#player');
+    const playerOneInput = document.querySelector('#playerOne');
+    const playerTwoInput = document.querySelector('#playerTwo');
+    const submitBtnOne = document.querySelector('.submit-player-names');
+    const submitBtnTwo = document.querySelector('.submit-player-name');
+    const closeModalOne = document.querySelector('.close-button-1');
+    const closeModalTwo = document.querySelector('.close-button-2');
 
-gameModeBtn.addEventListener('click',  () => {
-    if(!computer.returnStatus()) {
-        modalOne.showModal();
-    } else {
-        modalTwo.showModal();
+    gameModeBtn.addEventListener('click',  () => {
+        if(!computer.returnStatus()) {
+            modalOne.showModal();
+        } else {
+            modalTwo.showModal();
+        };
+    });
+
+    if(submitBtnOne) {
+        submitBtnOne.addEventListener('click', () => {
+            if(playerOneInput.value !== '' && playerTwoInput.value !== '') {
+                player1.getName(playerOneInput.value);
+                player2.getName(playerTwoInput.value);
+                gameboard.restartBoard();
+            };
+        });
     };
-});
 
-if(submitBtnOne) {
-    submitBtnOne.addEventListener('click', () => {
-        if(playerOneInput.value !== '' && playerTwoInput.value !== '') {
-            player1.getName(playerOneInput.value);
-            player2.getName(playerTwoInput.value);
-            gameboard.restartBoard();
-        };
+    if(submitBtnTwo) {
+        submitBtnTwo.addEventListener('click', () => {
+            if(playerInput.value !== '') {
+                player1.getName(playerInput.value);
+                gameboard.restartBoard();
+            };
+        });
+    };
+
+    closeModalOne.addEventListener('click', () => {
+        modalOne.close();
     });
-};
-
-if(submitBtnTwo) {
-    submitBtnTwo.addEventListener('click', () => {
-        if(playerInput.value !== '') {
-            player1.getName(playerInput.value);
-            gameboard.restartBoard();
-        };
+    
+    closeModalTwo.addEventListener('click', () => {
+        modalTwo.close();
     });
-};
 
-restartBtn.addEventListener('click', () => {
-    gameboard.restartBoard();
-});
+    restartBtn.addEventListener('click', () => {
+        gameboard.restartBoard();
+    });
+})();
 
-closeModalOne.addEventListener('click', () => {
-    modalOne.close();
-});
 
-closeModalTwo.addEventListener('click', () => {
-    modalTwo.close();
-});
+
+
+
+
+
