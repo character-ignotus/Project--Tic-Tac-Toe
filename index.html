@@ -40,7 +40,6 @@
     <div class="button-section">
         <button class="restart-btn">Restart</button>
         <button class="game-mode"></button>
-        <button class="test">Switch</button>
 
         <dialog class="modal-1">
             <form action="get" method="dialog">
@@ -73,8 +72,30 @@
           </dialog>
     </div>
     <div class="initial-section">
-        <button class="PvP">Player VS Player</button>
-        <button class="PvC">Player VS Computer</button>
+
+        <div class="PvP-Mode">
+            <form action="get" method="dialog">
+                  <div>
+                      <label for="player-one">PLAYER 1 NAME:</label>
+                      <input type="text" name="player-one" id="playerOneInit" required>
+                  </div>
+                  <div>
+                      <label for="player-two">PLAYER 2 NAME:</label>
+                      <input type="text" name="player-two" id="playerTwoInit" required>
+                  </div>
+              <button type="submit" class="PvP">Player VS Player</button>
+            </form>
+        </div>
+
+        <div class="PvC-Mode">
+            <form action="get" method="dialog">
+                  <div>
+                      <label for="player">PLAYER NAME:</label>
+                      <input type="text" name="player" id="playerInit" required>
+                  </div>
+              <button type="submit" class="PvC">Player VS Computer</button>
+            </form>
+          </div>
     </div>
 </body>
 </html>

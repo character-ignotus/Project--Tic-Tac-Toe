@@ -282,47 +282,55 @@ const domObject = (() => {
 
     const modalOne = document.querySelector('.modal-1');
     const modalTwo = document.querySelector('.modal-2');
+    const initialInputOne = document.querySelector('.PvP-Mode');
+    const initialInputTwo = document.querySelector('.PvC-Mode');
     const gameModeBtn = document.querySelector('.game-mode');
     const restartBtn = document.querySelector('.restart-btn');
     const playerInput = document.querySelector('#player');
+    const initPlayerInput = document.querySelector('#playerInit');
     const playerOneInput = document.querySelector('#playerOne');
     const playerTwoInput = document.querySelector('#playerTwo');
+    const initPlayerOneInput = document.querySelector('#playerOneInit');
+    const initPlayerTwoInput = document.querySelector('#playerTwoInit');
     const submitBtnOne = document.querySelector('.submit-player-names');
     const submitBtnTwo = document.querySelector('.submit-player-name');
     const closeModalOne = document.querySelector('.close-button-1');
     const closeModalTwo = document.querySelector('.close-button-2');
 
-    const switchMode = document.querySelector('.test');
-
     const pvP = document.querySelector('.PvP');
     const pvC = document.querySelector('.PvC');
 
     pvP.addEventListener('click', () => {
-        initSection.style.display = 'none';
-        mainSection.style.display = null;
-        btnSection.style.display = null;
-        gameboard.bindEvents();
+        if(initPlayerOneInput.value !== '' && initPlayerTwoInput.value !== '') {
+            player1.getName(initPlayerOneInput.value);
+            player2.getName(initPlayerTwoInput.value);
+            initSection.style.display = 'none';
+            gameModeBtn.textContent = 'PvC';
+            mainSection.style.display = null;
+            btnSection.style.display = null;
+            gameboard.bindEvents();
+        };
     });
 
     pvC.addEventListener('click', () => {
-        initSection.style.display = 'none';
-        mainSection.style.display = null;
-        btnSection.style.display = null;
-        computer.toggleStatus();
-        gameboard.bindEvents();
+        if(initPlayerInput.value !== '') {
+            player1.getName(initPlayerInput.value);
+            initSection.style.display = 'none';
+            gameModeBtn.textContent = 'PvP';
+            mainSection.style.display = null;
+            btnSection.style.display = null;
+            computer.toggleStatus();
+            gameboard.bindEvents();
+        };
     });
-
-    gameModeBtn.textContent = 'PvC';
 
     gameModeBtn.addEventListener('click', () => {
         if(gameModeBtn.textContent == 'PvP') {
             gameModeBtn.textContent = 'PvC';
             modalOne.showModal();
-            computer.toggleStatus();
         } else {
             gameModeBtn.textContent = 'PvP';
             modalTwo.showModal();
-            computer.toggleStatus();
         };
     });
 
@@ -331,7 +339,9 @@ const domObject = (() => {
             if(playerOneInput.value !== '' && playerTwoInput.value !== '') {
                 player1.getName(playerOneInput.value);
                 player2.getName(playerTwoInput.value);
+                computer.toggleStatus();
                 gameboard.restartBoard();
+                gameboard.bindEvents();
             };
         });
     };
@@ -340,7 +350,9 @@ const domObject = (() => {
         submitBtnTwo.addEventListener('click', () => {
             if(playerInput.value !== '') {
                 player1.getName(playerInput.value);
+                computer.toggleStatus();
                 gameboard.restartBoard();
+                gameboard.bindEvents();
             };
         });
     };
@@ -352,11 +364,6 @@ const domObject = (() => {
     closeModalTwo.addEventListener('click', () => {
         modalTwo.close();
     });
-
-    switchMode.addEventListener('click', () => {
-        computer.toggleStatus();
-        console.log(computer.getCurrentStatus());
-    }); 
 
     restartBtn.addEventListener('click', () => {
         gameboard.restartBoard();
