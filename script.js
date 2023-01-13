@@ -207,7 +207,7 @@ const gameboard = (() => {
     return {bindEvents, logComputerRound, returnBoard, returnRound, increaseRound, decreaseRound, returnScores, restartBoard};
 })();
 
-gameboard.bindEvents();
+// gameboard.bindEvents();
 
 //Minimax algorithm
 const algorithm = (() => {
@@ -273,6 +273,13 @@ const helperFunctions = (() => {
 
 // DOM Manipulation
 const domObject = (() => {
+    const mainSection = document.querySelector('.main-section');
+    const btnSection = document.querySelector('.button-section');
+    const initSection = document.querySelector('.initial-section'); 
+
+    mainSection.style.display = 'none';
+    btnSection.style.display = 'none';
+
     const modalOne = document.querySelector('.modal-1');
     const modalTwo = document.querySelector('.modal-2');
     const gameModeBtn = document.querySelector('.game-mode');
@@ -286,6 +293,24 @@ const domObject = (() => {
     const closeModalTwo = document.querySelector('.close-button-2');
 
     const switchMode = document.querySelector('.test');
+
+    const pvP = document.querySelector('.PvP');
+    const pvC = document.querySelector('.PvC');
+
+    pvP.addEventListener('click', () => {
+        initSection.style.display = 'none';
+        mainSection.style.display = null;
+        btnSection.style.display = null;
+        gameboard.bindEvents();
+    });
+
+    pvC.addEventListener('click', () => {
+        initSection.style.display = 'none';
+        mainSection.style.display = null;
+        btnSection.style.display = null;
+        computer.toggleStatus();
+        gameboard.bindEvents();
+    });
 
     gameModeBtn.textContent = 'PvC';
 
