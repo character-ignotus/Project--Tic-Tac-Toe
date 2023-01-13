@@ -114,16 +114,16 @@ const gameboard = (() => {
         'tie': 0
     };
 
+    const winnerAnnouncement = document.querySelector('.winner');
+
     let cells = Array.from(document.querySelectorAll('.cell'));
 
     let bindEvents = () => {
         cells.forEach(cell => {
             if(computer.getCurrentStatus()) {
                 cell.addEventListener('click', playerVScomputer);
-                console.log('1');
             } else {
                 cell.addEventListener('click', playerVSplayer);
-                console.log('2');
             };
         });
     };
@@ -133,7 +133,8 @@ const gameboard = (() => {
         e.target.textContent = board[row][column];
         let result = checkForWinner.check();
         if(result !== null) {
-            alert(`${result} has won!`);
+            // alert(`${result} has won!`);
+            winnerAnnouncement.textContent = `${result} has won!`;
         };
         round += 1;
     };
@@ -171,7 +172,8 @@ const gameboard = (() => {
             computer.computerMove(board);
             let result = checkForWinner.check();
             if(result !== null) {
-                alert(`${result} has won!`);
+                // alert(`${result} has won!`);
+                winnerAnnouncement.textContent = `${result} has won!`;
             };
             round += 1;
         };
@@ -195,19 +197,15 @@ const gameboard = (() => {
             if(!computer.getCurrentStatus()) {
                 cell.removeEventListener('click', playerVScomputer);
                 cell.textContent = '';
-                console.log('removedPvC');
             } else {
                 cell.removeEventListener('click', playerVSplayer);
                 cell.textContent = '';
-                console.log('removedPvP');
             };
         });
     };
 
     return {bindEvents, logComputerRound, returnBoard, returnRound, increaseRound, decreaseRound, returnScores, restartBoard};
 })();
-
-// gameboard.bindEvents();
 
 //Minimax algorithm
 const algorithm = (() => {
@@ -296,6 +294,7 @@ const domObject = (() => {
     const submitBtnTwo = document.querySelector('.submit-player-name');
     const closeModalOne = document.querySelector('.close-button-1');
     const closeModalTwo = document.querySelector('.close-button-2');
+    const winnerAnnouncement = document.querySelector('.winner');
 
     const pvP = document.querySelector('.PvP');
     const pvC = document.querySelector('.PvC');
@@ -337,6 +336,7 @@ const domObject = (() => {
     if(submitBtnOne) {
         submitBtnOne.addEventListener('click', () => {
             if(playerOneInput.value !== '' && playerTwoInput.value !== '') {
+                winnerAnnouncement.textContent = '';
                 player1.getName(playerOneInput.value);
                 player2.getName(playerTwoInput.value);
                 computer.toggleStatus();
@@ -349,6 +349,7 @@ const domObject = (() => {
     if(submitBtnTwo) {
         submitBtnTwo.addEventListener('click', () => {
             if(playerInput.value !== '') {
+                winnerAnnouncement.textContent = '';
                 player1.getName(playerInput.value);
                 computer.toggleStatus();
                 gameboard.restartBoard();
@@ -366,6 +367,7 @@ const domObject = (() => {
     });
 
     restartBtn.addEventListener('click', () => {
+        winnerAnnouncement.textContent = '';
         gameboard.restartBoard();
         gameboard.bindEvents();
     });
