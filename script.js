@@ -18,7 +18,17 @@ const player2 = Player();
 
 // Computer Object
 const computer = (() => {
-    const computerStatus = false;
+    let computerStatus;
+
+    const toggleStatus = () => {
+        if(computerStatus === true) {
+            computerStatus = false;
+        } else {
+            computerStatus = true;
+        };
+    };
+
+    const getCurrentStatus = () => computerStatus;
 
     const computerMove = (board) => {
         let optimalScore = Infinity;
@@ -45,7 +55,7 @@ const computer = (() => {
         return computerStatus;
     };
 
-    return {computerMove, returnStatus, computerStatus};
+    return {computerMove, returnStatus, toggleStatus, getCurrentStatus};
 })();
 
 // Object that checks for a winner
@@ -104,14 +114,16 @@ const gameboard = (() => {
         'tie': 0
     };
 
-    const cells = Array.from(document.querySelectorAll('.cell'));
+    let cells = Array.from(document.querySelectorAll('.cell'));
 
-    const bindEvents = () => {
+    let bindEvents = () => {
         cells.forEach(cell => {
-            if(computer.returnStatus() === true) {
+            if(computer.getCurrentStatus()) {
                 cell.addEventListener('click', playerVScomputer);
+                console.log('1');
             } else {
                 cell.addEventListener('click', playerVSplayer);
+                console.log('2');
             };
         });
     };
@@ -180,7 +192,15 @@ const gameboard = (() => {
         board = [[], [], []];
         round = 0;
         cells.forEach(cell => {
-            cell.textContent = '';
+            if(!computer.getCurrentStatus()) {
+                cell.removeEventListener('click', playerVScomputer);
+                cell.textContent = '';
+                console.log('removedPvC');
+            } else {
+                cell.removeEventListener('click', playerVSplayer);
+                cell.textContent = '';
+                console.log('removedPvP');
+            };
         });
     };
 
@@ -265,11 +285,19 @@ const domObject = (() => {
     const closeModalOne = document.querySelector('.close-button-1');
     const closeModalTwo = document.querySelector('.close-button-2');
 
-    gameModeBtn.addEventListener('click',  () => {
-        if(!computer.returnStatus()) {
+    const switchMode = document.querySelector('.test');
+
+    gameModeBtn.textContent = 'PvC';
+
+    gameModeBtn.addEventListener('click', () => {
+        if(gameModeBtn.textContent == 'PvP') {
+            gameModeBtn.textContent = 'PvC';
             modalOne.showModal();
+            computer.toggleStatus();
         } else {
+            gameModeBtn.textContent = 'PvP';
             modalTwo.showModal();
+            computer.toggleStatus();
         };
     });
 
@@ -300,10 +328,20 @@ const domObject = (() => {
         modalTwo.close();
     });
 
+    switchMode.addEventListener('click', () => {
+        computer.toggleStatus();
+        console.log(computer.getCurrentStatus());
+    }); 
+
     restartBtn.addEventListener('click', () => {
         gameboard.restartBoard();
+        gameboard.bindEvents();
     });
+
+    return {gameModeBtn};
 })();
+
+
 
 
 
