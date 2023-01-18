@@ -71,34 +71,39 @@
             </form>
           </dialog>
     </div>
-    <div class="initial-section">
 
+    <div class="initial-section">
         <div class="PvP-Mode">
             <form action="get" method="dialog">
-                  <div>
-                    Player VS Player Mode:
-                  </div>
-                  <div>
-                      <label for="player-one">PLAYER 1 NAME:</label>
-                      <input type="text" name="player-one" id="playerOneInit" required>
-                  </div>
-                  <div>
-                      <label for="player-two">PLAYER 2 NAME:</label>
-                      <input type="text" name="player-two" id="playerTwoInit" required>
-                  </div>
+              <div>
+                Player VS Player Mode:
+              </div>
+              <div class="PvP-input-section">
+                <div class="first-player-section">
+                    <img src="" alt="image of first player">
+                    <label for="player-one">PLAYER 1 NAME:</label>
+                    <input type="text" name="player-one" id="playerOneInit" required>
+                </div>
+                <div class="second-player-section">
+                    <img src="" alt="image of second player">
+                    <label for="player-two">PLAYER 2 NAME:</label>
+                    <input type="text" name="player-two" id="playerTwoInit" required>
+                </div>
+              </div>
               <button type="submit" class="PvP">Player VS Player</button>
             </form>
         </div>
 
         <div class="PvC-Mode">
             <form action="get" method="dialog">
-                <div>
-                    Player VS Computer Mode:
-                  </div>
-                  <div>
-                      <label for="player">PLAYER NAME:</label>
-                      <input type="text" name="player" id="playerInit" required>
-                  </div>
+              <div>
+                Player VS Computer Mode:
+              </div>
+              <div class="PvC-input-section">
+                <img src="" alt="image of first player">
+                <label for="player">PLAYER NAME:</label>
+                <input type="text" name="player" id="playerInit" required>
+              </div>
               <button type="submit" class="PvC">Player VS Computer</button>
             </form>
           </div>

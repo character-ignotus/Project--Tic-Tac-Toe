@@ -48,3 +48,33 @@ body {
     align-items: center;
     gap: 150px;
 }
+
+.initial-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+}
+
+.PvP-Mode, .PvC-Mode {
+    width: 600px;
+    border: 1px solid black;
+}
+
+.PvP-Mode > form, .PvC-Mode > form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+
+.PvP-input-section {
+    display: flex;
+    gap: 80px;
+}
+
+.first-player-section, .second-player-section, .PvC-input-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
