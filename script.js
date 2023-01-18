@@ -47,7 +47,9 @@ const computer = (() => {
             }
         };
         let cell = document.querySelector(`[data-row-column="${optimalMove[0]}${optimalMove[1]}"]`);
-        cell.textContent = 'O';
+        setTimeout(function(){
+            cell.textContent = 'O';
+        }, 750);
         gameboard.logComputerRound(optimalMove[0], optimalMove[1], 'O');
     };
 
@@ -173,7 +175,9 @@ const gameboard = (() => {
             let result = checkForWinner.check();
             if(result !== null) {
                 // alert(`${result} has won!`);
-                winnerAnnouncement.textContent = `${result} has won!`;
+                setTimeout(function(){
+                    winnerAnnouncement.textContent = `${result} has won!`;
+                }, 750);
             };
             round += 1;
         };
