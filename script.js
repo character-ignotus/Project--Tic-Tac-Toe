@@ -275,10 +275,12 @@ const helperFunctions = (() => {
 
 // DOM Manipulation
 const domObject = (() => {
+    const announcemnetSection = document.querySelector('.announcement-section');
     const mainSection = document.querySelector('.main-section');
     const btnSection = document.querySelector('.button-section');
     const initSection = document.querySelector('.initial-section'); 
 
+    announcemnetSection.style.display = 'none';
     mainSection.style.display = 'none';
     btnSection.style.display = 'none';
 
@@ -299,6 +301,9 @@ const domObject = (() => {
     const closeModalOne = document.querySelector('.close-button-1');
     const closeModalTwo = document.querySelector('.close-button-2');
     const winnerAnnouncement = document.querySelector('.winner');
+    const playerOneNametag = document.querySelector('.player-one-nametag');
+    const playerTwoNametag = document.querySelector('.player-two-nametag');
+    const secondAvatar = document.querySelector('.second-avatar');
 
     const pvP = document.querySelector('.PvP');
     const pvC = document.querySelector('.PvC');
@@ -307,8 +312,12 @@ const domObject = (() => {
         if(initPlayerOneInput.value !== '' && initPlayerTwoInput.value !== '') {
             player1.getName(initPlayerOneInput.value);
             player2.getName(initPlayerTwoInput.value);
+            playerOneNametag.textContent = initPlayerOneInput.value;
+            playerTwoNametag.textContent = initPlayerTwoInput.value;
+            secondAvatar.src = 'Images/Avatar-2.png';
             initSection.style.display = 'none';
             gameModeBtn.textContent = 'PvC';
+            announcemnetSection.style.display = null;
             mainSection.style.display = null;
             btnSection.style.display = null;
             gameboard.bindEvents();
@@ -318,8 +327,12 @@ const domObject = (() => {
     pvC.addEventListener('click', () => {
         if(initPlayerInput.value !== '') {
             player1.getName(initPlayerInput.value);
+            playerOneNametag.textContent = initPlayerInput.value;
+            playerTwoNametag.textContent = 'COMPUTER AI';
+            secondAvatar.src = 'Images/AI.png';
             initSection.style.display = 'none';
             gameModeBtn.textContent = 'PvP';
+            announcemnetSection.style.display = null;
             mainSection.style.display = null;
             btnSection.style.display = null;
             computer.toggleStatus();
@@ -340,9 +353,12 @@ const domObject = (() => {
     if(submitBtnOne) {
         submitBtnOne.addEventListener('click', () => {
             if(playerOneInput.value !== '' && playerTwoInput.value !== '') {
-                winnerAnnouncement.textContent = '';
+                winnerAnnouncement.textContent = 'Winner Announcer';
                 player1.getName(playerOneInput.value);
                 player2.getName(playerTwoInput.value);
+                playerOneNametag.textContent = playerOneInput.value;
+                playerTwoNametag.textContent = playerTwoInput.value;
+                secondAvatar.src = 'Images/Avatar-2.png';
                 computer.toggleStatus();
                 gameboard.restartBoard();
                 gameboard.bindEvents();
@@ -353,8 +369,11 @@ const domObject = (() => {
     if(submitBtnTwo) {
         submitBtnTwo.addEventListener('click', () => {
             if(playerInput.value !== '') {
-                winnerAnnouncement.textContent = '';
+                winnerAnnouncement.textContent = 'Winner Announcer';
                 player1.getName(playerInput.value);
+                playerOneNametag.textContent = playerInput.value;
+                playerTwoNametag.textContent = 'COMPUTER AI';
+                secondAvatar.src = 'Images/AI.png';
                 computer.toggleStatus();
                 gameboard.restartBoard();
                 gameboard.bindEvents();
@@ -371,7 +390,7 @@ const domObject = (() => {
     });
 
     restartBtn.addEventListener('click', () => {
-        winnerAnnouncement.textContent = '';
+        winnerAnnouncement.textContent = 'Winner Announcer';
         gameboard.restartBoard();
         gameboard.bindEvents();
     });

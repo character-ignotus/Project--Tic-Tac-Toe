@@ -14,6 +14,11 @@ body {
 
 .announcement-section {
     grid-row: 1/2;
+    /* height: 68.37px; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 35px;
 }
 
 .main-section {
@@ -22,6 +27,19 @@ body {
     justify-content: space-evenly;
     align-items: center;
 }
+
+.avatar-one, .avatar-two {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+.avatar-one > img, .avatar-two > img{
+    width: 200px;
+    height: 200px;
+} 
 
 .gameboard {
     width: 510px;
@@ -64,6 +82,7 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
     gap: 30px;
 }
 
