@@ -389,10 +389,12 @@ const domObject = (() => {
 
     closeModalOne.addEventListener('click', () => {
         modalOne.close();
+        gameModeBtn.textContent = 'PvP';
     });
     
     closeModalTwo.addEventListener('click', () => {
         modalTwo.close();
+        gameModeBtn.textContent = 'PvC';
     });
 
     restartBtn.addEventListener('click', () => {
