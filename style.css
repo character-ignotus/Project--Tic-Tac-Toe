@@ -10,6 +10,7 @@
 body {
     min-height: 100vh;
     display: grid;
+    position: relative;
 }
 
 .announcement-section {
@@ -76,6 +77,13 @@ body {
     justify-content: center;
     align-items: center;
     gap: 150px;
+}
+
+.modal-1, .modal-2 {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
 .initial-section {
