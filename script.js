@@ -49,7 +49,7 @@ const computer = (() => {
         let cell = document.querySelector(`[data-row-column="${optimalMove[0]}${optimalMove[1]}"]`);
         setTimeout(function(){
             cell.textContent = 'O';
-        }, 750);
+        }, 175);
         gameboard.logComputerRound(optimalMove[0], optimalMove[1], 'O');
     };
 
@@ -137,6 +137,9 @@ const gameboard = (() => {
         if(result !== null) {
             // alert(`${result} has won!`);
             winnerAnnouncement.textContent = `${result} has won!`;
+            cells.forEach(cell => {
+                cell.removeEventListener('click', playerVSplayer);
+            });
         };
         round += 1;
     };
@@ -177,7 +180,10 @@ const gameboard = (() => {
                 // alert(`${result} has won!`);
                 setTimeout(function(){
                     winnerAnnouncement.textContent = `${result} has won!`;
-                }, 750);
+                }, 175);
+                cells.forEach(cell => {
+                    cell.removeEventListener('click', playerVScomputer);
+                });
             };
             round += 1;
         };
