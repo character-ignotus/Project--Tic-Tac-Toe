@@ -11,7 +11,6 @@ body {
     min-height: 100vh;
     display: grid;
     position: relative;
-
     background: linear-gradient(-45deg, #015C92, #2D82B5, #52a6d8, #88CDF6, #BCE6FF);
     background-size: 400% 400%;
     animation: animate 10s ease-in-out infinite;
@@ -294,6 +293,10 @@ body {
         width: 115px;
         height: 115px;
         font-size: 120px;
+    }
+
+    body {
+        background-size: 30% 2000%;
     }
 }
 

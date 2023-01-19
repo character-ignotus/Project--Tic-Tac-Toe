@@ -117,7 +117,6 @@ const gameboard = (() => {
     };
 
     const winnerAnnouncement = document.querySelector('.winner');
-
     let cells = Array.from(document.querySelectorAll('.cell'));
 
     let bindEvents = () => {
@@ -135,7 +134,6 @@ const gameboard = (() => {
         e.target.textContent = board[row][column];
         let result = checkForWinner.check();
         if(result !== null) {
-            // alert(`${result} has won!`);
             winnerAnnouncement.textContent = `${result} has won!`;
             cells.forEach(cell => {
                 cell.removeEventListener('click', playerVSplayer);
@@ -177,7 +175,6 @@ const gameboard = (() => {
             computer.computerMove(board);
             let result = checkForWinner.check();
             if(result !== null) {
-                // alert(`${result} has won!`);
                 setTimeout(function(){
                     winnerAnnouncement.textContent = `${result} has won!`;
                 }, 175);
