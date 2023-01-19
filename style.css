@@ -15,7 +15,6 @@ body {
 
 .announcement-section {
     grid-row: 1/2;
-    /* height: 68.37px; */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -80,10 +79,27 @@ body {
 }
 
 .modal-1, .modal-2 {
+    border-radius: 15px;
+    border: 1px solid black;
+    box-shadow: 3px 4px 4px rgba(138,131,117,0.4);
+    border: 0px;
+    padding: 10px;
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+}
+
+.modal-1 > form, .modal-2 > form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 7.5px;
+}
+
+.close-button-1, .close-button-2 {
+    align-self: end;
 }
 
 .initial-section {
@@ -120,4 +136,23 @@ body {
 .first-player-section > img,  .second-player-section > img, .PvC-input-section > img{
     width: 75px;
     height: 75px;
+}
+
+@media (max-width: 925px) {
+    .avatar-one, .avatar-two {
+        display: none;
+    }
+}
+
+@media (max-width: 550px) {
+    .gameboard {
+        width: 345px;
+        height: 345px;
+    }
+
+    .gameboard > div > div {
+        width: 115px;
+        height: 115px;
+        font-size: 120px;
+    }
 }
