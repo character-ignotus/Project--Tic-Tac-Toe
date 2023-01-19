@@ -129,8 +129,69 @@ body {
     gap: 7.5px;
 }
 
+.submit-player-names, .submit-player-name {
+    border: 2px solid black;
+    padding: 3.5px 9px;
+    font-size: 1rem;
+    font-weight: 900;
+    border-radius: 15px;
+    background-color: #fff;
+}
+
+.submit-player-names:hover, .submit-player-name:hover {
+    background-color: rgb(76, 193, 235);
+    box-shadow: 3px 4px 4px rgba(138,131,117,0.4);
+    background: linear-gradient(-45deg, #015C92, #2D82B5, #52a6d8, #88CDF6, #BCE6FF);
+    background-size: 400% 400%;
+    animation: animate 10s ease-in-out infinite;
+}
+
+.inputs {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.inputs label {
+    font-size: 1rem;
+    font-weight: 700;
+}
+
+.inputs input {
+    border: 2px solid rgba(94, 90, 81, 0.4);
+    font-size: 1rem;
+    padding: 1.5px 7.5px;
+    border-radius: 15px;
+    width: 150px;
+}
+
+.inputs input:focus {
+    border: 2px solid rgb(37, 150, 190);
+    box-shadow: 3px 4px 4px rgba(138,131,117,0.4);
+}
+
+.inputs > div {
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+}
+
 .close-button-1, .close-button-2 {
     align-self: end;
+    border-radius: 50%;
+    width: 22.5px;
+    height: 22.5px;
+    font-size: 0.85rem;
+    border: 0px;
+    font-weight: 900;
+    background-color: #f8858b;
+    text-align: center;
+}
+
+.close-button-1:hover, .close-button-2:hover {
+    background-color: #e54c38;
+    box-shadow: 3px 4px 4px rgba(138,131,117,0.4);
+    color: #ffffff;
 }
 
 .initial-section {
@@ -148,7 +209,6 @@ body {
 
 .PvP-Mode, .PvC-Mode {
     width: 475px;
-
     background-color: #ecf0f3;
     border-radius: 15px;
     box-shadow: 3px 5px 5px rgba(138,131,117,0.4);
