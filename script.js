@@ -359,7 +359,7 @@ const domObject = (() => {
     if(submitBtnOne) {
         submitBtnOne.addEventListener('click', () => {
             if(playerOneInput.value !== '' && playerTwoInput.value !== '') {
-                winnerAnnouncement.textContent = 'Winner Announcer';
+                winnerAnnouncement.textContent = 'And...';
                 player1.getName(playerOneInput.value);
                 player2.getName(playerTwoInput.value);
                 playerOneNametag.textContent = playerOneInput.value;
@@ -375,7 +375,7 @@ const domObject = (() => {
     if(submitBtnTwo) {
         submitBtnTwo.addEventListener('click', () => {
             if(playerInput.value !== '') {
-                winnerAnnouncement.textContent = 'Winner Announcer';
+                winnerAnnouncement.textContent = 'And...';
                 player1.getName(playerInput.value);
                 playerOneNametag.textContent = playerInput.value;
                 playerTwoNametag.textContent = 'COMPUTER AI';
@@ -398,7 +398,7 @@ const domObject = (() => {
     });
 
     restartBtn.addEventListener('click', () => {
-        winnerAnnouncement.textContent = 'Winner Announcer';
+        winnerAnnouncement.textContent = 'And...';
         gameboard.restartBoard();
         gameboard.bindEvents();
     });
