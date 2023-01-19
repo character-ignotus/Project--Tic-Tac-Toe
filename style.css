@@ -53,6 +53,11 @@ body {
     height: 200px;
 } 
 
+.player-one-nametag, .player-two-nametag {
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
 .gameboard {
     width: 510px;
     height: 510px;
