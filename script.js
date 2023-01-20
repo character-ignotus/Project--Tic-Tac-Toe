@@ -134,7 +134,11 @@ const gameboard = (() => {
         e.target.textContent = board[row][column];
         let result = checkForWinner.check();
         if(result !== null) {
-            winnerAnnouncement.textContent = `${result} has won!`;
+            if(result === 'tie') {
+                winnerAnnouncement.textContent = `We have a ${result}!`;
+            } else {
+                winnerAnnouncement.textContent = `${result} has won!`;
+            }
             cells.forEach(cell => {
                 cell.removeEventListener('click', playerVSplayer);
             });
@@ -175,9 +179,15 @@ const gameboard = (() => {
             computer.computerMove(board);
             let result = checkForWinner.check();
             if(result !== null) {
-                setTimeout(function(){
-                    winnerAnnouncement.textContent = `${result} has won!`;
-                }, 175);
+                if(result === 'tie') {
+                    setTimeout(function(){
+                        winnerAnnouncement.textContent = `We have a ${result}!`;
+                    }, 175);
+                } else {
+                    setTimeout(function(){
+                        winnerAnnouncement.textContent = `${result} has won!`;
+                    }, 175);
+                }
                 cells.forEach(cell => {
                     cell.removeEventListener('click', playerVScomputer);
                 });
