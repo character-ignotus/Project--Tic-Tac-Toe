@@ -18,7 +18,7 @@ A game of Tic-Tac-Toe armed with two playable modes. The first game mode lets tw
 - 'PvP','PvC' buttons let user(s) change the game mode
 - Initial Section wich:
     - Shows the user(s) two modals for choosing the desired game mode
-    - Let user(s) input their usernames beofre choosing the desired game mode
+    - Let user(s) input their usernames before choosing the desired game mode
 
 ## MiniMax algorithm: 
 The MiniMax algorithm is a recursive or backtracking algorithm used in decision-making. It provides an optimal move for the player assuming that the opponent is also playing optimally. The algorithm uses recursion to search through something called a game-tree & computes the minimax decision for the current state. In this algorithm two players play the game & one of them is the Maximizer while the other is the Minimizer. Both players play against each other & the opponent player gets the minimum benefit while the other gets the maximum benefit. Both players of the game are opponents of each other & the Maximizer will select the maximized value while the Minimizer will select the minimized value. The MiniMax algorithm performs a depth-first search algorithm for the exploration of the complete game tree, proceeding all the way down to the terminal node of the tree, then backtracks the tree which provides the optimal move.
