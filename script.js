@@ -53,11 +53,7 @@ const computer = (() => {
         gameboard.logComputerRound(optimalMove[0], optimalMove[1], 'O');
     };
 
-    const returnStatus = () => {
-        return computerStatus;
-    };
-
-    return {computerMove, returnStatus, toggleStatus, getCurrentStatus};
+    return {computerMove, toggleStatus, getCurrentStatus};
 })();
 
 // Object that checks for a winner
@@ -68,7 +64,7 @@ const checkForWinner = (() => {
         let currentPlayer;
         let currentIndex;
 
-        if (computer.returnStatus()) {
+        if (computer.getCurrentStatus()) {
             if(currentRound%2 == 0) {
                 currentPlayer = 'player';
                 currentIndex = 'X';
